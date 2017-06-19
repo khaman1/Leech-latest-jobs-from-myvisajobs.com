@@ -24,7 +24,7 @@ FileWriter = codecs.open('JobList' + str(today) + '.csv', 'wb', 'utf-8')
 YEAR='2017'
 
 ## WRITE HEADER
-FileWriter.write('Rank| H1B Visa Sponsor| Number of LCA  *| Average Salary| Job Title\n')
+FileWriter.write('Rank|H1B Visa Sponsor|Number of LCA|Average Salary|Job Title\n')
     
 with open('JobLinksFull.txt') as JobLinks:
   for JobLink in JobLinks.readlines():
