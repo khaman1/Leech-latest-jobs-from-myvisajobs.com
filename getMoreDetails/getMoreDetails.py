@@ -27,7 +27,7 @@ NUMBER_OF_APPROVED_H1B_CANDIDATES_IN_A_COMPANY_AT_LEAST = 20
 
 ##################################################################
 FileWriter.write('Rank,H1B Visa Sponsor,Number of LCA,Average Salary,Job Title,Job Openings, Homepage Link,Glassdoor,Indeed\n')
-input_file = csv.DictReader(open('JobList2017-06-19-FULL.csv'))
+input_file = csv.DictReader(open('JobList2017-06-19-RemoveDuplicatedSponsor.csv'))
 
 LineCnt=0
 for row in input_file:
@@ -52,6 +52,9 @@ for row in input_file:
     ## INDEED
     Indeed_JobLink = 'https://www.indeed.com/jobs?q=' + row['H1B Visa Sponsor'] + '&l=United+States'
 
+    ## MONSTER
+    Monster_JobLink = 'https://www.monster.com/jobs/search/?q=' + row['H1B Visa Sponsor'] + '&where=United-States'
+
     ## GET NUMBER OF JOB OPENINGS
     browser.get(Glassdoor_JobLink)
     source = BeautifulSoup(browser.page_source, "html.parser")
@@ -68,7 +71,7 @@ for row in input_file:
     TEXT_TO_WRITE = row['Rank'] + ',' + row['H1B Visa Sponsor'] + ',' + row['Number of LCA'] +\
                     ',"' + row['Average Salary'] + '",' + row['Job Title']
     FileWriter.write(TEXT_TO_WRITE + ',' + str(JobOpenings) + ',' + HomePageLink\
-                     + ',' + Glassdoor_JobLink + ',' + Indeed_JobLink + '\n')
+                     + ',' + Glassdoor_JobLink + ',' + Indeed_JobLink + ',' + Monster_JobLink + '\n')
  
 
 browser.quit()
